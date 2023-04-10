@@ -13,7 +13,8 @@ def welcome():
     global counter
     counter += 1
     return render_template("welcome.html",
-                           message="This page has been served " + str(counter) + " times.")
+                           message="This page has been served " + str(counter) + " times.",
+                           cards=db)
 
 
 @app.route("/date")
@@ -32,6 +33,6 @@ def count_views():
 def card_view(index):
     try:
         card = db[index]
-        return render_template("card.html", card=card, index=index)
+        return render_template("card.html", card=card, index=index, max_index=len(db)-1)
     except IndexError:
         abort(404)
