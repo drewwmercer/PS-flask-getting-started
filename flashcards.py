@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 counter = 0
 
+
 @app.route("/")
 def welcome():
     global counter
@@ -26,7 +27,8 @@ def count_views():
     counter += 1
     return "This page has been served " + str(counter) + " times."
 
-@app.route("/card")
-def card_view():
-    card = db[0]
+
+@app.route("/card/<int:index>")
+def card_view(index):
+    card = db[index]
     return render_template("card.html", card=card)
