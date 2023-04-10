@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 from model import db
 
 app = Flask(__name__)
@@ -30,5 +30,8 @@ def count_views():
 
 @app.route("/card/<int:index>")
 def card_view(index):
-    card = db[index]
-    return render_template("card.html", card=card)
+    try:
+        card = db[index]
+        return render_template("card.html", card=card, index=index)
+    except IndexError:
+        abort(404)

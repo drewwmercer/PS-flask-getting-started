@@ -10,5 +10,17 @@
     <h1>Flash Card</h1>
     Question: {{card.question}} <br>
     Answer: {{card.answer}}
+    <p>
+        <button>
+            <a href="{{ url_for('welcome') }}">
+                Home
+            </a>
+        </button>
+        <button>
+            <a href="{{ url_for('card_view', index=index + 1) }}">
+                Next card
+            </a>
+        </button>
+    </p>
 </body>
 </html>
