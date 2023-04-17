@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Flash Card</title>
-  </head>
-  <body>
+{% extends 'base.html' %} {% block title %}Flash Card{% endblock %} {% block
+  content %}
     <h1>Flash Card</h1>
     Question: {{card.question}} <br />
     Answer: {{card.answer}}
@@ -24,3 +16,4 @@
     </p>
   </body>
 </html>
+{% endblock %}
