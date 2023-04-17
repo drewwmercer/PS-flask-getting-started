@@ -1,7 +1,7 @@
 from datetime import datetime
 from tempfile import TemporaryFile
-from flask import Flask, render_template, abort, jsonify
-from model import db
+from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
+from model import db, save_db
 
 app = Flask(__name__)
 
@@ -43,9 +43,28 @@ def card_view(index):
 def api_card_list():
     return jsonify(db)
 
-@app.route('/add_card')
+@app.route('/add_card', methods=["GET", "POST"])
 def add_card():
-    return render_template("add_card.html")
+    try:
+        if request.method == "POST":
+            card = {"question": request.form['question'],
+            "answer": request.form['answer']}
+            db.append(card)
+            save_db()
+            return redirect(url_for('welcome'))
+        else: 
+            return render_template("add_card.html")
+    except:
+        abort(404)
+
+@app.route('/remove_card<int:index>', methods=["GET", "POST"])
+def remove_card(index):
+    if request.method == "POST":
+        del db[index]
+        save_db()
+        return redirect(url_for('welcome'))
+    else: 
+        return render_template("remove_card.html", card=db[index])
 
 @app.route('/api/card/<int:index>')
 def api_card_detail(index):
