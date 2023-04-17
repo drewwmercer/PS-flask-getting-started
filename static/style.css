@@ -2,4 +2,9 @@ body {
     font-family: sans-serif;
     color: cornflowerblue;
     background-color: floralwhite;
+    margin: 2em 5em;
+}
+
+img { 
+    width: 5em;
 }
