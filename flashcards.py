@@ -43,6 +43,10 @@ def card_view(index):
 def api_card_list():
     return jsonify(db)
 
+@app.route('/add_card')
+def add_card():
+    return render_template("add_card.html")
+
 @app.route('/api/card/<int:index>')
 def api_card_detail(index):
     try:
